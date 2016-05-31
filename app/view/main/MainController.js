@@ -17,5 +17,17 @@ Ext.define('extTestTs.view.main.MainController', {
         if (choice === 'yes') {
             //
         }
-    }
+    },
+
+    onCallbackHellButtonClick: function (button, event, eventOptions) {
+        var me = this
+
+        var array = [Math.random(), Math.random(), Math.random()]
+
+        for(var ind in array) {
+            me.getViewModel().set("inputNum", array[ind])
+        }
+
+        me.getViewModel().set("inputNumbers", array)
+    },
 });

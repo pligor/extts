@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'extTestTs' );
-$image-search-path: '/home/student/Desktop/Typescript/extTestTs/build/development/extTestTs/classic/resources';
+$image-search-path: 'C:/Users/gpligoropoulos/IdeaProjects/exttestts/build/development/extTestTs/classic/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;

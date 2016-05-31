@@ -10,16 +10,24 @@ Ext.define('extTestTs.view.main.Main', {
     xtype: 'app-main',
 
     requires: [
+        'Ext.button.Button',
+        'Ext.layout.container.boxOverflow.None',
+        'Ext.panel.Panel',
+        'Ext.plugin.Responsive',
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
-
+        'extTestTs.view.main.List',
         'extTestTs.view.main.MainController',
-        'extTestTs.view.main.MainModel',
-        'extTestTs.view.main.List'
+        'extTestTs.view.main.MainModel'
     ],
 
-    controller: 'main',
-    viewModel: 'main',
+    controller: {
+        type: 'main',
+    },
+
+    viewModel: {
+        type: 'main',
+    },
 
     ui: 'navigation',
 
@@ -85,8 +93,33 @@ Ext.define('extTestTs.view.main.Main', {
     }, {
         title: 'Users',
         iconCls: 'fa-user',
+
+        xtype: 'panel',
+
+        defaults: {
+            margin: 10,
+        },
+
+        items: [{
+            xtype: 'button',
+            text: "press me to give you numbers and test callback hell",
+            listeners: {
+                click: "onCallbackHellButtonClick",
+            },
+        }, {
+            bind: {
+                html: "inputs: {inputNumbers}",
+            }
+        }, {
+            html: "If negative you get slow response, if positive you get fast"
+        }, {
+            bind: {
+                html: "last output: {outputNumber}",
+            },
+        }],
+
         bind: {
-            html: '{loremIpsum}'
+            //html: '{loremIpsum}'
         }
     }, {
         title: 'Groups',
