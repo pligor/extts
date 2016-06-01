@@ -114,7 +114,7 @@ Ext.define('extTestTs.view.main.Main', {
             html: "If negative you get slow response, if positive you get fast"
         }, {
             bind: {
-                html: "last output: {outputNumber}",
+                html: "outputs: {outputNumsString}",
             },
         }],
 
