@@ -13,32 +13,75 @@ Ext.define('extTestTs.view.main.MainModel', {
 
         inputNum: null,
 
-        inputNumbers: [],
-
         outputNum: null,
+
+        inputNumbers: [],
 
         outputNumbers: [],
     },
 
     formulas: {
         outputNumsString: {
-            bind: {
-                bindTo: "{outputNumbers}",
-                deep: true,
-            },
+            bind: "{outputNumbers}",
 
             get: function (nums) {
-                if (Ext.isArray(nums)) {
-                    console.log("inside formula")
-                    console.log(nums)
+                console.log("outputNumsString")
+
+                if (Ext.isArray(nums) && !Ext.isEmpty(nums)) {
+                    return nums.join(" | ")
+                } else {
+                    return "empty"
+                }
+            },
+        },
+
+        outputNumbers: {
+            bind: "{outputNum}",
+
+            get: function (num) {
+                if (num) {
+                    var viewModel = this
+
+                    return Ext.Array.clone(
+                        Ext.Array.push(viewModel.get("outputNumbers"), num)
+                    )
+                } else {
+                    return []
+                }
+            },
+        },
+
+        inputNumbers: {
+            bind: "{inputNum}",
+
+            get: function (num) {
+                if (num) {
+                    var viewModel = this
+
+                    return Ext.Array.clone(
+                        Ext.Array.push(viewModel.get("inputNumbers"), num)
+                    )
+                } else {
+                    return []
+                }
+            },
+        },
+
+        inputNumsString: {
+            bind: "{inputNumbers}",
+
+            get: function (nums) {
+                console.log("inputNumsString")
+
+                if (Ext.isArray(nums) && !Ext.isEmpty(nums)) {
+                    //console.log("inside formula")
+                    //console.log(nums)
 
                     return nums.join(" | ")
                 } else {
-                    return null
+                    return "empty"
                 }
             },
         },
     },
-
-    //TODO - add formulas and/or methods to support your view
 });

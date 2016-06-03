@@ -11,6 +11,8 @@ Ext.define('extTestTs.view.main.Main', {
 
     requires: [
         'Ext.button.Button',
+        'Ext.form.Panel',
+        'Ext.form.field.Display',
         'Ext.layout.container.boxOverflow.None',
         'Ext.panel.Panel',
         'Ext.plugin.Responsive',
@@ -94,7 +96,7 @@ Ext.define('extTestTs.view.main.Main', {
         title: 'Users',
         iconCls: 'fa-user',
 
-        xtype: 'panel',
+        xtype: 'form',
 
         defaults: {
             margin: 10,
@@ -107,20 +109,28 @@ Ext.define('extTestTs.view.main.Main', {
                 click: "onCallbackHellButtonClick",
             },
         }, {
+            xtype: 'displayfield',
+
+            fieldLabel: "inputs",
+
+            labelSeparator: ":",
+
             bind: {
-                html: "inputs: {inputNumbers}",
+                value: "{inputNumsString}",
             }
         }, {
             html: "If negative you get slow response, if positive you get fast"
         }, {
+            xtype: 'displayfield',
+
+            fieldLabel: "outputs",
+
+            labelSeparator: ":",
+
             bind: {
-                html: "outputs: {outputNumsString}",
+                value: "{outputNumsString}",
             },
         }],
-
-        bind: {
-            //html: '{loremIpsum}'
-        }
     }, {
         title: 'Groups',
         iconCls: 'fa-users',

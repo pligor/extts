@@ -20,12 +20,59 @@ Ext.define('extTestTs.view.main.MainController', {
     init: function () {
         var me = this
 
-        me._bindOutputWithItsStack()
+        //me._bindInputWithItsStack()
+
+        //me._bindOutputWithItsStack()
 
         me._bindInputWithOutput()
     },
 
-    _bindOutputWithItsStack: function () {
+    _bindInputWithOutput: function () {
+        var me = this
+
+        me.getViewModel().bind("{inputNum}", function (num) {
+            if(num) {
+                if(num % 2) {
+                    setTimeout(function() {
+                        me.getViewModel().set("outputNum", num * 100)
+                    }, 1000)
+                } else {
+                    me.getViewModel().set("outputNum", num * 100)
+                }
+            } else {
+                console.log("input num was null")
+            }
+        })
+    },
+
+    _count: 0,
+
+    onCallbackHellButtonClick: function (button, event, eventOptions) {
+        var me = this
+
+        //var array = [Math.random(), Math.random(), Math.random()]
+        /*for (var ind in array) {
+            console.log(array[ind])
+
+            me.getViewModel().set("inputNum", array[ind])
+        }
+         me.getViewModel().set("inputNumbers", array)*/
+
+        me._count += 1
+
+        me.getViewModel().set("inputNum", me._count)
+    },
+
+    /**
+     * @private
+     */
+    _clearOutputNums: function () {
+        var me = this
+
+        me.getViewModel().set("outputNumbers", [])
+    },
+
+   /* _bindOutputWithItsStack: function () {
         var me = this
 
         me.getViewModel().bind("{outputNum}", function (num) {
@@ -42,44 +89,24 @@ Ext.define('extTestTs.view.main.MainController', {
                 console.log("output num was null")
             }
         })
-    },
+    },*/
 
-    _bindInputWithOutput: function () {
-        var me = this
+    /*_bindInputWithItsStack: function () {
+     var me = this
 
-        me.getViewModel().bind("{inputNum}", function (num) {
-            if(num) {
-                console.log("inputNum: " + num)
-                //TODO make slow and fast
-                me.getViewModel().set("outputNum", num * 100)
-            } else {
-                console.log("input num was null")
-            }
-        })
-    },
+     me.getViewModel().bind("{inputNum}", function (num) {
+     if(num) {
+     var nums = me.getViewModel().get("inputNumbers")
 
-    onCallbackHellButtonClick: function (button, event, eventOptions) {
-        var me = this
+     nums.push(num)
 
-        me._clearOutputNums()
+     me.getViewModel().set("inputNumbers", nums)
 
-        var array = [Math.random(), Math.random(), Math.random()]
-
-        for (var ind in array) {
-            console.log(array[ind])
-
-            me.getViewModel().set("inputNum", array[ind])
-        }
-
-        me.getViewModel().set("inputNumbers", array)
-    },
-
-    /**
-     * @private
-     */
-    _clearOutputNums: function () {
-        var me = this
-
-        me.getViewModel().set("outputNumbers", [])
-    },
+     console.log("input numbers")
+     console.log(me.getViewModel().get("inputNumbers"))
+     } else {
+     //console.log("output num was null")
+     }
+     })
+     },*/
 });
