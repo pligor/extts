@@ -30,7 +30,6 @@ var funcs = [
         console.log(obj.value);
     }
 ];
-//queue(funcs, obj)
 ////////////////////////
 function funcWrapper(func, argConverter) {
     var args = [];
@@ -47,8 +46,7 @@ var bindFuncs = {
     running: false,
 };
 var queueWithState = function (bindFuncs, scope) {
-    if (scope === void 0) { scope = this; }
-    var curScope = scope || this;
+    var curScope = scope; //do not remove the semicolon
     (function next() {
         if (bindFuncs.funcs.length > 0) {
             bindFuncs.running = true;
@@ -72,7 +70,7 @@ var callbackHeavenWrapper = function (funcWithCallbacksInside, myBindFuncs, myar
     if (myBindFuncs.running) {
     }
     else {
-        queueWithState(myBindFuncs);
+        queueWithState(myBindFuncs, scope);
     }
 };
 function funcOriginal(x) {
@@ -102,8 +100,8 @@ function funcModified(callback) {
 function wrapper(x) {
     callbackHeavenWrapper(funcModified, bindFuncs, argConv, this, x);
 }
-wrapper(2);
-wrapper(-5);
-wrapper(6);
-wrapper(-11);
+wrapper(1);
+wrapper(-2);
+wrapper(3);
+wrapper(-4);
 //# sourceMappingURL=CallbackHell.js.map

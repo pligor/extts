@@ -16,9 +16,14 @@ Ext.define('extTestTs.util.CallbackHeaven', {
         }
     },
 
+    /*
+     function
+     */
+
     //an example from regular function to function with callback as first param
     /*
-     function funcModified(callback, x:number) {    //modified
+     function funcModified(callback) {    //modified
+     return function (x:number) {
      if (x > 0) {
      setTimeout(function () {
      console.log(x * 10)
@@ -27,6 +32,7 @@ Ext.define('extTestTs.util.CallbackHeaven', {
      } else {
      console.log(x * -10)
      callback()
+     }
      }
      }
      */
@@ -59,40 +65,40 @@ Ext.define('extTestTs.util.CallbackHeaven', {
             me.funcWrapper.apply(scope, [funcWithCallbacksInside, myargconv].concat(Array.prototype.slice.call(arguments, 4)))
         )
 
+
+        console.log("myBindFuncs.running")
+        console.log(myBindFuncs.running)
+
         if (myBindFuncs.running) {
-            //no need to requeue
+            console.log("no need to requeue")
         } else {
-            me.queueWithState(myBindFuncs)
+            me.queueWithState(myBindFuncs, scope)
         }
     },
 
     queueWithState: function (bindFuncs, scope) {
-        var curScope = scope || this;
+        var curScope = scope;
 
         (function next() {
+            console.log("in next")
+
             if (bindFuncs.funcs.length > 0) {
                 bindFuncs.running = true
 
-                var f = bindFuncs.funcs.shift();
-                f.apply(curScope, [next].concat(Array.prototype.slice.call(arguments, 0)));
+                var f = bindFuncs.funcs.shift()
+
+                var argArray = [next].concat(Array.prototype.slice.call(arguments, 0))
+
+                //debugger;
+
+                console.log("argArray")
+                console.log(argArray)
+
+                f.apply(curScope, argArray);
             } else {
                 bindFuncs.running = false
             }
         })()
-    },
-
-    queue: function (funcs, scope) {
-        var curScope = scope || this
-
-            (function next() {
-                if (funcs.length > 0) {
-                    var f = funcs.shift()
-
-                    f.apply(curScope, [next].concat(Array.prototype.slice.call(arguments, 0)));
-                } else {
-                    //nop
-                }
-            })();
     },
 
     /**
@@ -104,7 +110,21 @@ Ext.define('extTestTs.util.CallbackHeaven', {
         var theArgs = Array.prototype.slice.call(arguments, 2)
 
         return function (callback) {
-            funcWithCallbackFirstParam(callback, argConverter(theArgs))
+            funcWithCallbackFirstParam(callback)(argConverter(theArgs))
         }
     },
+
+    /*queue: function (funcs, scope) {
+     var curScope = scope || this
+
+     (function next() {
+     if (funcs.length > 0) {
+     var f = funcs.shift()
+
+     f.apply(curScope, [next].concat(Array.prototype.slice.call(arguments, 0)));
+     } else {
+     //nop
+     }
+     })();
+     },*/
 });

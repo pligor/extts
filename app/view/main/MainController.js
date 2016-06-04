@@ -7,6 +7,10 @@ Ext.define('extTestTs.view.main.MainController', {
 
     alias: 'controller.main',
 
+    requires: [
+        'extTestTs.util.CallbackHeaven'
+    ],
+
     onItemSelected: function (sender, record) {
         Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
     },
@@ -31,18 +35,45 @@ Ext.define('extTestTs.view.main.MainController', {
         var me = this
 
         me.getViewModel().bind("{inputNum}", function (num) {
-            if(num) {
-                if(num % 2) {
-                    setTimeout(function() {
+            extTestTs.util.CallbackHeaven.callbackHeavenWrapper(
+                me._funcModified,
+                me._bindFuncs,
+                function (args) {
+                    console.log("args")
+                    console.log(args)
+                    return args.pop()
+                },
+                me,
+                num
+            )
+        })
+    },
+
+    _bindFuncs: extTestTs.util.CallbackHeaven.initBindFuncs(),
+
+    _funcModified: function (callback) {
+        var me = this
+
+        return function (num) {
+            console.log("fuckin called with num: " + num)
+
+            if (num) {
+                if (num % 2) {
+                    setTimeout(function () {
                         me.getViewModel().set("outputNum", num * 100)
+
+                        callback()
                     }, 1000)
                 } else {
                     me.getViewModel().set("outputNum", num * 100)
+
+                    callback()
                 }
             } else {
                 console.log("input num was null")
+                callback()
             }
-        })
+        }
     },
 
     _count: 0,
@@ -52,10 +83,10 @@ Ext.define('extTestTs.view.main.MainController', {
 
         //var array = [Math.random(), Math.random(), Math.random()]
         /*for (var ind in array) {
-            console.log(array[ind])
+         console.log(array[ind])
 
-            me.getViewModel().set("inputNum", array[ind])
-        }
+         me.getViewModel().set("inputNum", array[ind])
+         }
          me.getViewModel().set("inputNumbers", array)*/
 
         me._count += 1
@@ -72,24 +103,24 @@ Ext.define('extTestTs.view.main.MainController', {
         me.getViewModel().set("outputNumbers", [])
     },
 
-   /* _bindOutputWithItsStack: function () {
-        var me = this
+    /* _bindOutputWithItsStack: function () {
+     var me = this
 
-        me.getViewModel().bind("{outputNum}", function (num) {
-            if(num) {
-                var nums = me.getViewModel().get("outputNumbers")
+     me.getViewModel().bind("{outputNum}", function (num) {
+     if(num) {
+     var nums = me.getViewModel().get("outputNumbers")
 
-                nums.push(num)
+     nums.push(num)
 
-                me.getViewModel().set("outputNumbers", nums)
+     me.getViewModel().set("outputNumbers", nums)
 
-                console.log("output numbers")
-                console.log(me.getViewModel().get("outputNumbers"))
-            } else {
-                console.log("output num was null")
-            }
-        })
-    },*/
+     console.log("output numbers")
+     console.log(me.getViewModel().get("outputNumbers"))
+     } else {
+     console.log("output num was null")
+     }
+     })
+     },*/
 
     /*_bindInputWithItsStack: function () {
      var me = this

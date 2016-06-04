@@ -36,7 +36,6 @@ var funcs:any = [
     }
 ]
 
-//queue(funcs, obj)
 ////////////////////////
 
 function funcWrapper(func, argConverter, ...args) {
@@ -52,8 +51,8 @@ var bindFuncs = {
     running: false,
 }
 
-var queueWithState = function (bindFuncs, scope = this) {
-    var curScope = scope || this;
+var queueWithState = function (bindFuncs, scope) {
+    var curScope = scope;   //do not remove the semicolon
 
     (function next() {
         if (bindFuncs.funcs.length > 0) {
@@ -79,7 +78,7 @@ var callbackHeavenWrapper = function (funcWithCallbacksInside, myBindFuncs, myar
     if (myBindFuncs.running) {
         //no need to requeue
     } else {
-        queueWithState(myBindFuncs)
+        queueWithState(myBindFuncs, scope)
     }
 }
 
@@ -94,7 +93,7 @@ function funcOriginal(x:number) {    //normal
 }
 
 function funcModified(callback) {    //modified
-    return function (x:number) {
+    return function (x) {
         if (x > 0) {
             setTimeout(function () {
                 console.log(x * 10)
@@ -111,7 +110,7 @@ function wrapper(x) {
     callbackHeavenWrapper(funcModified, bindFuncs, argConv, this, x)
 }
 
-wrapper(2)
-wrapper(-5)
-wrapper(6)
-wrapper(-11)
+wrapper(1)
+wrapper(-2)
+wrapper(3)
+wrapper(-4)
