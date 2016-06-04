@@ -39,8 +39,8 @@ Ext.define('extTestTs.view.main.MainController', {
                 me._funcModified,
                 me._bindFuncs,
                 function (args) {
-                    console.log("args")
-                    console.log(args)
+                    //console.log("args")
+                    //console.log(args)
                     return args.pop()
                 },
                 me,
@@ -51,20 +51,23 @@ Ext.define('extTestTs.view.main.MainController', {
 
     _bindFuncs: extTestTs.util.CallbackHeaven.initBindFuncs(),
 
-    _funcModified: function (callback) {
-        var me = this
+    _funcModified: function (scope, callback) {
+        var me = scope
 
         return function (num) {
-            console.log("fuckin called with num: " + num)
+            //console.log("fuckin called with num: " + num)
 
             if (num) {
                 if (num % 2) {
                     setTimeout(function () {
+                        console.log("output num: " + num)
+
                         me.getViewModel().set("outputNum", num * 100)
 
                         callback()
                     }, 1000)
                 } else {
+                    console.log("output num: " + num)
                     me.getViewModel().set("outputNum", num * 100)
 
                     callback()

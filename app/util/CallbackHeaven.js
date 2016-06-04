@@ -22,7 +22,7 @@ Ext.define('extTestTs.util.CallbackHeaven', {
 
     //an example from regular function to function with callback as first param
     /*
-     function funcModified(callback) {    //modified
+     function funcModified(scope, callback) {    //modified
      return function (x:number) {
      if (x > 0) {
      setTimeout(function () {
@@ -62,15 +62,14 @@ Ext.define('extTestTs.util.CallbackHeaven', {
         var me = this
 
         myBindFuncs.funcs.push(
-            me.funcWrapper.apply(scope, [funcWithCallbacksInside, myargconv].concat(Array.prototype.slice.call(arguments, 4)))
+            me.funcWrapper.apply(scope, [scope, funcWithCallbacksInside, myargconv].concat(Array.prototype.slice.call(arguments, 4)))
         )
 
-
-        console.log("myBindFuncs.running")
-        console.log(myBindFuncs.running)
+        //console.log("myBindFuncs.running")
+        //console.log(myBindFuncs.running)
 
         if (myBindFuncs.running) {
-            console.log("no need to requeue")
+            //console.log("no need to requeue")
         } else {
             me.queueWithState(myBindFuncs, scope)
         }
@@ -80,7 +79,7 @@ Ext.define('extTestTs.util.CallbackHeaven', {
         var curScope = scope;
 
         (function next() {
-            console.log("in next")
+            //console.log("in next")
 
             if (bindFuncs.funcs.length > 0) {
                 bindFuncs.running = true
@@ -91,8 +90,8 @@ Ext.define('extTestTs.util.CallbackHeaven', {
 
                 //debugger;
 
-                console.log("argArray")
-                console.log(argArray)
+                //console.log("argArray")
+                //console.log(argArray)
 
                 f.apply(curScope, argArray);
             } else {
@@ -102,15 +101,16 @@ Ext.define('extTestTs.util.CallbackHeaven', {
     },
 
     /**
+     * @param scope
      * @param funcWithCallbackFirstParam the modified callback function that includes the callback as the first parameter
      * @param argConverter function that converts the array arguments into what the original function was expecting
      * @returns {Function}
      */
-    funcWrapper: function (funcWithCallbackFirstParam, argConverter) {
-        var theArgs = Array.prototype.slice.call(arguments, 2)
+    funcWrapper: function (scope, funcWithCallbackFirstParam, argConverter) {
+        var theArgs = Array.prototype.slice.call(arguments, 3)
 
         return function (callback) {
-            funcWithCallbackFirstParam(callback)(argConverter(theArgs))
+            funcWithCallbackFirstParam(scope, callback)(argConverter(theArgs))
         }
     },
 
