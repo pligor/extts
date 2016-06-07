@@ -193,14 +193,17 @@
   "js": [
     //You need to define them first
     {
-      //"path": "./app/store/PersonnelStore.js",
       "path": "app/store/Individual.js",
       "includeInBundle": true
     },
 
     {
-      //"path": "./app/store/PersonnelStore.js",
-      "path": "app/store/PersonnelStore.js",
+      "path": "app/pligorExtTS/MemoryStore.js",
+      "includeInBundle": true
+    },
+
+    {
+      "path": "app/pligorExtTS/Store.js",
       "includeInBundle": true
     },
 

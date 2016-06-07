@@ -1,4 +1,5 @@
 // @tag full-page
-// @require C:\Users\gpligoropoulos\IdeaProjects\exttestts\app\store\Individual.js
-// @require C:\Users\gpligoropoulos\IdeaProjects\exttestts\app\store\PersonnelStore.js
-// @require C:\Users\gpligoropoulos\IdeaProjects\exttestts\app.js
+// @require /home/student/Desktop/Typescript/extTestTs/app/store/Individual.js
+// @require /home/student/Desktop/Typescript/extTestTs/app/pligorExtTS/MemoryStore.js
+// @require /home/student/Desktop/Typescript/extTestTs/app/pligorExtTS/Store.js
+// @require /home/student/Desktop/Typescript/extTestTs/app.js

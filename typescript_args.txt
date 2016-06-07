@@ -1,0 +1,5 @@
+--target es5
+--module commonjs
+--outFile tsapp.js
+app/store/Individual.ts
+app/store/PersonnelStore.ts
