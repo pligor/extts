@@ -192,8 +192,9 @@
    */
   "js": [
     //You need to define them first
+
     {
-      "path": "app/store/Individual.js",
+      "path": "app/pligorExtTS/Store.js",
       "includeInBundle": true
     },
 
@@ -203,7 +204,7 @@
     },
 
     {
-      "path": "app/pligorExtTS/Store.js",
+      "path": "app/store/Individual.js",
       "includeInBundle": true
     },
 
