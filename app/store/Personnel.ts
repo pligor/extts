@@ -13,22 +13,53 @@ var memoryStore = new MemoryStore<Individual>("personnel", [
     new Individual("Data", "deanna.troi@enterprise.com", "+30-6969696969"),
 ])
 
-Ext.define('extTestTs.store.Personnel', {
-    extend: 'Ext.data.Store',
+//memoryStore.toExtJS()
 
-    alias: memoryStore.alias,
+Ext.define('extTestTs.store.Personnel', function (Personnel) {
+    return memoryStore.toExtJS()
 
-    fields: memoryStore.fields,
-
-    data: {
-        items: memoryStore.items
-    },
-
-    proxy: {
-        type: 'memory',
-        reader: {
-            type: 'json',
-            rootProperty: MemoryStore.rootProperty
-        }
-    }
+    return {}
 });
+
+
+/*(function(){
+ //return JSON.stringify(memoryStore.toExtJS())  //fails
+
+ //return Ext.Object.merge({},{})    //fails
+
+ /!*return {                          //simple and works
+ constructor: function () {
+ this.callParent(arguments)
+ }
+ }*!/
+
+ return function() {
+
+ }
+ })()*/
+
+
+/*extend: 'Ext.data.Store',
+
+ constructor: function () {
+ console.log(memoryStore.toExtJS())
+
+ this.callParent(arguments)
+ },
+
+ alias: memoryStore.alias,
+
+ fields: memoryStore.fields,
+
+ data: {
+ items: memoryStore.items
+ },
+
+ proxy: {
+ type: 'memory',
+ reader: {
+ type: 'json',
+ rootProperty: MemoryStore.rootProperty
+ }
+ }*/
+
