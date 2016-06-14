@@ -193,11 +193,11 @@
   "js": [
     //You need to define them first
     {
-      "path": "app/store/Individual.js",
+      "path": "ts/Individual.js",
       "includeInBundle": true
     },
     {
-      "path": "app/store/MemoryStore.js",
+      "path": "ts/MemoryStore.js",
       "includeInBundle": true
     },
     //and always put the bundle as last
