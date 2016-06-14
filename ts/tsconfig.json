@@ -1,7 +1,7 @@
 //https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 {
   "compilerOptions": {
-    //"outFile": "../../built/local/tsc.js",  we want each output file to be generated right there
+    "outFile": "tsc.js",  //we want each output file to be generated right there
     //"noImplicitAny": true,
     //"preserveConstEnums": true,
     "sourceMap": true,
@@ -9,9 +9,6 @@
     "module": "commonjs",
     "removeComments": true,
     "noImplicitReturns": true,
-    "allowUnreachableCode": true
-  },
-  "exclude": [  //http://blog.mgechev.com/2016/03/28/ambient-type-definitions-duplicate-identifier-typescript-fix/
-    "declarations"
-  ]
+    "allowUnreachableCode": false //we are setting it to default as only for extjs classes we need this peculiar thing
+  }
 }
