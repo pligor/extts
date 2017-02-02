@@ -192,22 +192,15 @@
    */
   "js": [
     //You need to define them first
-
+    /*{
+      "path": "ts/Individual.js",
+      "includeInBundle": true
+    },*/
     {
-      "path": "app/pligorExtTS/Store.js",
+
+      "path": "ts/tsc.js",
       "includeInBundle": true
     },
-
-    {
-      "path": "app/pligorExtTS/MemoryStore.js",
-      "includeInBundle": true
-    },
-
-    {
-      "path": "app/store/Individual.js",
-      "includeInBundle": true
-    },
-
     //and always put the bundle as last
     {
       "path": "app.js",

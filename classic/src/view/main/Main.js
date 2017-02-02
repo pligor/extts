@@ -98,39 +98,9 @@ Ext.define('extTestTs.view.main.Main', {
 
         xtype: 'form',
 
-        defaults: {
-            margin: 10,
-        },
-
-        items: [{
-            xtype: 'button',
-            text: "press me to give you numbers and test callback hell",
-            listeners: {
-                click: "onCallbackHellButtonClick",
-            },
-        }, {
-            xtype: 'displayfield',
-
-            fieldLabel: "inputs",
-
-            labelSeparator: ":",
-
-            bind: {
-                value: "{inputNumsString}",
-            }
-        }, {
-            html: "If negative you get slow response, if positive you get fast"
-        }, {
-            xtype: 'displayfield',
-
-            fieldLabel: "outputs",
-
-            labelSeparator: ":",
-
-            bind: {
-                value: "{outputNumsString}",
-            },
-        }],
+        bind: {
+            html: '{loremIpsum}'
+        }
     }, {
         title: 'Groups',
         iconCls: 'fa-users',

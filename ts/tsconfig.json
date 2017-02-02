@@ -1,0 +1,14 @@
+//https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+{
+  "compilerOptions": {
+    "outFile": "tsc.js",  //we want each output file to be generated right there
+    //"noImplicitAny": true,
+    //"preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false //we are setting it to default as only for extjs classes we need this peculiar thing
+  }
+}
